@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-import re
 import json
+import re
 import sys
-import jsonschema
 
+import jsonschema
 
 _IDENTIFIER_PATTERN = "^[a-z_A-Z][0-9a-z_A-Z]*$"
 
@@ -34,7 +34,7 @@ _SERVICE_SCHEMA = {
             "type": "object",
             "patternProperties": {_IDENTIFIER_PATTERN: _RPC_SCHEMA},
             "additionalProperties": False,
-        }
+        },
     },
     "required": ["methods"],
     "additionalProperties": False,
@@ -47,8 +47,11 @@ _FIELD_SCHEMA = {
         "type": {
             "anyOf": [
                 {"enum": ["uint32", "bool", "string"]},
-                {"type": "string", "pattern": "^(lq\\.)?[a-z_A-Z][0-9a-z_A-Z]*$"},
-            ]
+                {
+                    "type": "string",
+                    "pattern": "^(lq\\.)?[a-z_A-Z][0-9a-z_A-Z]*$",
+                },
+            ],
         },
         "id": {"type": "integer", "minimum": 1},
     },
@@ -67,7 +70,9 @@ _MESSAGE_SCHEMA = {
         },
         "nested": {
             "type": "object",
-            "patternProperties": {_IDENTIFIER_PATTERN: {"$dynamicRef": "#message"}},
+            "patternProperties": {
+                _IDENTIFIER_PATTERN: {"$dynamicRef": "#message"},
+            },
             "additionalProperties": False,
         },
     },
@@ -82,7 +87,7 @@ _ENUM_SCHEMA = {
             "type": "object",
             "patternProperties": {_IDENTIFIER_PATTERN: {"type": "integer"}},
             "additionalPattern": False,
-        }
+        },
     },
     "required": ["values"],
     "additionalProperties": False,
@@ -91,7 +96,9 @@ _ENUM_SCHEMA = {
 _LQ_SCHEMA = {
     "type": "object",
     "patternProperties": {
-        _IDENTIFIER_PATTERN: {"oneOf": [_SERVICE_SCHEMA, _MESSAGE_SCHEMA, _ENUM_SCHEMA]}
+        _IDENTIFIER_PATTERN: {
+            "oneOf": [_SERVICE_SCHEMA, _MESSAGE_SCHEMA, _ENUM_SCHEMA],
+        },
     },
     "additionalProperties": False,
 }
@@ -110,11 +117,11 @@ _SCHEMA = {
                     },
                     "required": ["nested"],
                     "additionalProperties": False,
-                }
+                },
             },
             "required": ["lq"],
             "additionalProperties": False,
-        }
+        },
     },
     "required": ["nested"],
     "additionalProperties": False,
@@ -130,8 +137,8 @@ def _parse_service(service_name: str, service_spec: dict[str, dict]) -> str:
         lines.append(
             (
                 method_name,
-                f"  rpc {method_name} ({request_type}) returns ({response_type});",
-            )
+                f"  rpc {method_name} ({request_type}) returns ({response_type});",  # noqa: E501
+            ),
         )
     lines.sort(key=lambda e: e[0])
     for _, line in lines:
@@ -141,7 +148,7 @@ def _parse_service(service_name: str, service_spec: dict[str, dict]) -> str:
 
 
 def _parse_message(
-    indent: int, message_name: str, message_spec: dict[str, dict]
+    indent: int, message_name: str, message_spec: dict[str, dict],
 ) -> str:
     result = (" " * indent) + "message " + message_name + " {\n"
     lines = []
@@ -159,8 +166,8 @@ def _parse_message(
     for _, line in lines:
         result += line + "\n"
     if "nested" in message_spec:
-        for message_name, message_spec in message_spec["nested"].items():
-            result += _parse_message(indent + 2, message_name, message_spec)
+        for _message_name, _message_spec in message_spec["nested"].items():
+            result += _parse_message(indent + 2, _message_name, _message_spec)
     result += (" " * indent) + "}\n"
     return result
 
