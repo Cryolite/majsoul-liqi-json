@@ -10,7 +10,6 @@ RUN set -euxo pipefail; \
       python3 \
       python3-venv; \
     apt-get clean && rm -rf /var/lib/apt/lists/*; \
-    useradd -ms /bin/bash ubuntu; \
     mkdir /workspace; \
     chown ubuntu:ubuntu /workspace
 
@@ -22,7 +21,8 @@ RUN set -euxo pipefail; \
     . "$HOME/.local/bin/activate"; \
     python3 -m pip install -U pip; \
     python3 -m pip install -U \
-      jsonschema
+      jsonschema \
+      types-jsonschema
 
 COPY parse.py /workspace
 
