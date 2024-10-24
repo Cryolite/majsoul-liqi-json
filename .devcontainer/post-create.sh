@@ -25,11 +25,8 @@ uv python install --no-progress
 
 pushd /workspaces/majsoul-liqi-json
 rm -rf .venv
-uv venv --seed
-. .venv/bin/activate
-python3 -m pip install -U pip
-python3 -m pip install -U \
+uv venv
+uv pip install -U \
   jsonschema \
   types-jsonschema
-deactivate
 popd
