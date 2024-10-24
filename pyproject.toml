@@ -1,0 +1,62 @@
+[project]
+name = "majsoul-liqi-json"
+version = "0.1.0"
+description = "Generate .proto file from MahjongSoul liqi.json"
+authors = [
+    { name = "Cryolite", email = "cryolite.indigo@gmail.com" },
+]
+license = { text = "MIT License" }
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Private :: Do Not Upload",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "jsonschema>=4.23.0",
+]
+
+[project.urls]
+Repository = "https://github.com/Cryolite/majsoul-liqi-json.git"
+
+[tool.uv]
+package = false
+dev-dependencies = [
+    "mypy>=1.12.1,<2",
+    "ruff>=0.7.0,<0.8",
+    "types-jsonschema>=4.23.0.20240813",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 79
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D", # pydocstyle
+
+    "ANN002",  # missing-type-args
+    "ANN003",  # missing-type-kwargs
+    "ANN101",  # missing-type-self
+    "ANN102",  # missing-type-cls
+    "TD002",   # missing-todo-author
+    "TD003",   # missing-todo-link
+    "PLR0911", # too-many-return-statements
+    "PLR0912", # too-many-branches
+    "PLR0913", # too-many-arguments
+    "PLR0915", # too-many-statements
+
+    "S101", # assert
+    "T201", # print
+]
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 72
+ignore-overlong-task-comments = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
