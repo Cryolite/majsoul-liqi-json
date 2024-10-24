@@ -1,0 +1,14 @@
+.git
+.gitignore
+
+.dockerignore
+Dockerfile*
+
+LICENSE
+README.md
+THIRD-PARTY-NOTICES.md
+
+.vscode
+
+.mypy_cache
+.venv
