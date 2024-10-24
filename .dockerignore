@@ -6,6 +6,7 @@ Dockerfile*
 
 LICENSE
 README.md
+THIRD-PARTY-NOTICES.md
 
 .devcontainer
 .vscode
