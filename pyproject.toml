@@ -49,6 +49,9 @@ ignore = [
     "PLR0912", # too-many-branches
     "PLR0913", # too-many-arguments
     "PLR0915", # too-many-statements
+
+    "S101", # assert
+    "T201", # print
 ]
 
 [tool.ruff.lint.pycodestyle]
