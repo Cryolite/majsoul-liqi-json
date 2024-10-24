@@ -1,0 +1,15 @@
+.git
+.gitignore
+
+.dockerignore
+Dockerfile*
+
+LICENSE
+README.md
+
+.devcontainer
+.vscode
+
+.mypy_cache
+.ruff_cache
+.venv
