@@ -11,10 +11,10 @@ _IDENTIFIER_PATTERN = "^[a-z_A-Z][0-9a-z_A-Z]*$"
 _OPTIONS_SCHEMA = {
     "type": "object",
     "properties": {
-        "syntax": {"const": "proto3"}
+        "syntax": {"const": "proto3"},
     },
     "required": ["syntax"],
-    "additionalProperties": False
+    "additionalProperties": False,
 }
 
 _LQ_OPTIONS_SCHEMA = {
@@ -158,7 +158,9 @@ def _parse_service(service_name: str, service_spec: dict[str, dict]) -> str:
 
 
 def _parse_message(
-    indent: int, message_name: str, message_spec: dict[str, dict],
+    indent: int,
+    message_name: str,
+    message_spec: dict[str, dict],
 ) -> str:
     result = (" " * indent) + "message " + message_name + " {\n"
     lines = []
